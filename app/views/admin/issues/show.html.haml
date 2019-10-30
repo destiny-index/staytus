@@ -10,6 +10,9 @@
     %dt Description
     %dd= @issue.title
   %dl.definition.u-margin-top
+    %dt Detected at
+    %dd= @issue.detected_at.to_formatted_s(:rfc822)
+  %dl.definition.u-margin-top
     %dt State
     %dd= @issue.state.humanize
 

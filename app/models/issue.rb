@@ -24,6 +24,7 @@ class Issue < ActiveRecord::Base
   validates :title, :presence => true
   validates :state, :inclusion => {:in => STATES}
   validates :service_status_id, :presence => true
+  validates :detected_at, :presence => true
 
   scope :ordered, -> { order(:id => :desc) }
   scope :ongoing, -> { where.not(:state => 'resolved') }
@@ -50,6 +51,7 @@ class Issue < ActiveRecord::Base
     string :identifier
     string :created_at
     string :updated_at
+    string :detected_at
     string(:services) { services.map(&:name) }
     relationship :service_status
     relationship :user
@@ -90,6 +92,10 @@ class Issue < ActiveRecord::Base
     if self.notify?
       self.delay.send_notifications
     end
+  end
+
+  def detected_time
+    self.detected_at || Time.zone.now
   end
 
   private

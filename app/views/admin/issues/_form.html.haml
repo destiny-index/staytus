@@ -5,6 +5,10 @@
       %dt.fieldSet__label= f.label :title
       %dd.fieldSet__input= f.text_field :title, :class => 'textInput', :autofocus => @issue.new_record?, :required => true
 
+    %dl.fieldSet__field.u-margin
+      %dt.fieldSet__label= f.label :detected_at
+      %dd.fieldSet__input= f.datetime_local_field :detected_at, :class => 'textInput', :value => @issue.detected_time.strftime("%Y-%m-%dT%H:%M")
+
     - if @issue.new_record?
       %dl.fieldSet__field.u-margin
         %dt.fieldSet__label= f.label :initial_update, "Text for the first update"
